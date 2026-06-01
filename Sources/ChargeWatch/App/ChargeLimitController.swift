@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
 import AppKit
+import Combine
 
 /// 充电上限 UI 的唯一数据源：读取 + 设置编排 + 能力门禁 + 轮询生命周期 + 降级。
 /// 由 AppContainer 创建，经 StatusBarController 注入 MenuBarPanel。
@@ -17,6 +18,11 @@ final class ChargeLimitController: ObservableObject {
     private let reader: any ChargeLimitReading
     private let bridge: any ChargeLimitSetting
     private var pollTimer: Timer?
+    /// App 重新激活时立即刷新一次，配合 3 秒 polling 保证"冲突覆盖中"状态新鲜度。
+    private var activationCancellable: AnyCancellable?
+
+    /// 轮询周期（秒）。压低以保证 SMCChargeLimitSection 冲突覆盖状态的新鲜度。
+    private static let pollInterval: TimeInterval = 3
 
     init(reader: any ChargeLimitReading = ChargeLimitReader(), bridge: any ChargeLimitSetting = ShortcutBridge()) {
         self.reader = reader
@@ -28,14 +34,21 @@ final class ChargeLimitController: ObservableObject {
     func startPolling() {
         Task { await refresh() }
         pollTimer?.invalidate()
-        pollTimer = Timer.scheduledTimer(withTimeInterval: 15, repeats: true) { [weak self] _ in
+        pollTimer = Timer.scheduledTimer(withTimeInterval: Self.pollInterval, repeats: true) { [weak self] _ in
             Task { @MainActor in await self?.refresh() }
         }
+        activationCancellable = NotificationCenter.default
+            .publisher(for: NSApplication.didBecomeActiveNotification)
+            .sink { [weak self] _ in
+                Task { @MainActor in await self?.refresh() }
+            }
     }
 
     func stopPolling() {
         pollTimer?.invalidate()
         pollTimer = nil
+        activationCancellable?.cancel()
+        activationCancellable = nil
     }
 
     // MARK: 读取
