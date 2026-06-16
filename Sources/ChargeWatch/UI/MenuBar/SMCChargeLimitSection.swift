@@ -33,6 +33,20 @@ struct SMCChargeLimitSection: View {
     private static let sliderStep: Double = 5
     private static let tickValues: [Int] = SMCChargeLimiter.steps
 
+    /// 冲突说明 popover 里的「系统设置 > 电池」截图引导素材。
+    /// 走 NSImage(contentsOf:) 显式加载，避免 SwiftUI 的 Image(_:bundle:) 在无 .xcassets 时找不到资源。
+    private static let guideImage: NSImage? = {
+        let baseName = "battery-page-charging-row"
+        let candidates: [URL?] = [
+            Bundle.module.url(forResource: baseName + "@2x", withExtension: "png"),
+            Bundle.module.url(forResource: baseName, withExtension: "png")
+        ]
+        for case let url? in candidates {
+            if let img = NSImage(contentsOf: url) { return img }
+        }
+        return nil
+    }()
+
     var body: some View {
         GroupBox {
             VStack(alignment: .leading, spacing: AppSpacing.s) {
@@ -139,6 +153,8 @@ struct SMCChargeLimitSection: View {
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
 
+            batteryPageGuide
+
             Button {
                 chargeLimit.openSystemBatterySettings()
                 showConflictInfo = false
@@ -151,7 +167,43 @@ struct SMCChargeLimitSection: View {
             .controlSize(.regular)
         }
         .padding(AppSpacing.l)
-        .frame(width: 300)
+        .frame(width: 320)
+    }
+
+    /// 系统设置 > 电池页的静态截图缩略图 + 红圈标注「充电」行 ⓘ 按钮的位置，
+    /// 让用户在跳转之前先记住要找的位置。图像由项目自带（Sources/ChargeWatch/UI/Resources/ConflictGuide），
+    /// 在不同 macOS 版本下可能与真实页面有细微差异，仅作引导用。
+    @ViewBuilder
+    private var batteryPageGuide: some View {
+        VStack(alignment: .leading, spacing: AppSpacing.xs) {
+            Text("打开后请找到「充电」一行，点右侧 ⓘ 把上限拖到 100%：")
+                .font(.system(size: 11))
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+
+            ZStack(alignment: .topLeading) {
+                if let nsImage = Self.guideImage {
+                    Image(nsImage: nsImage)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 280)
+                        .clipShape(RoundedRectangle(cornerRadius: 6))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 6)
+                                .stroke(Color.secondary.opacity(0.25), lineWidth: 0.5)
+                        )
+
+                    // 图像 1x 显示为 280×91.5 pt。
+                    // 经 PIL bbox 扫描精确定位：充电行 ⓘ 按钮 @2x bbox=[519-537, 158-176]，
+                    // 中心 @1x ≈ (264, 83.5)。红圈直径 28，左上 offset = 中心 − 14 = (250, 69.5)。
+                    Circle()
+                        .stroke(Color.red, lineWidth: 2)
+                        .frame(width: 28, height: 28)
+                        .offset(x: 250, y: 69.5)
+                }
+            }
+            .accessibilityLabel("系统设置 电池页截图，红圈标出「充电」行右侧的更多信息按钮位置")
+        }
     }
 
     /// 头部百分比徽标：数字 monospacedDigit + 紧凑 % 后缀，层级清晰、宽度稳定。

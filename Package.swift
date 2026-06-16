@@ -12,6 +12,9 @@ let package = Package(
         .executableTarget(
             name: "ChargeWatch",
             path: "Sources/ChargeWatch",
+            resources: [
+                .process("UI/Resources")
+            ],
             linkerSettings: [
                 .linkedFramework("IOKit"),
                 .linkedFramework("AppKit"),
