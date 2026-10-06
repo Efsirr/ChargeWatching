@@ -9,7 +9,7 @@
 [![Platform](https://img.shields.io/badge/平台-macOS%2013%2B-000000?style=flat-square&logo=apple&logoColor=white)](https://www.apple.com/macos/)
 [![Apple Silicon](https://img.shields.io/badge/充电上限-Apple%20Silicon-555555?style=flat-square&logo=apple&logoColor=white)](#系统要求)
 [![Swift](https://img.shields.io/badge/Swift-5.9-FA7343?style=flat-square&logo=swift&logoColor=white)](https://swift.org)
-[![Version](https://img.shields.io/badge/版本-v0.6.0-2563EB?style=flat-square)](https://github.com/TY-teo/ChargeWatching/releases)
+[![Version](https://img.shields.io/badge/版本-v0.7.0-2563EB?style=flat-square)](https://github.com/TY-teo/ChargeWatching/releases)
 [![License](https://img.shields.io/badge/许可证-MIT-3DA639?style=flat-square)](LICENSE)
 
 [English](README.en.md) · [Русский](README.ru.md) · **简体中文**
@@ -104,7 +104,7 @@ ChargeWatch 是一款常驻 macOS 菜单栏的小工具，做两件事，并且�
 
 ### 1. 下载
 
-前往 [Releases](https://github.com/TY-teo/ChargeWatching/releases) 下载 `ChargeWatch-0.6.0.zip`，解压后把 `ChargeWatch.app` 拖入"应用程序"。
+前往 [Releases](https://github.com/TY-teo/ChargeWatching/releases) 下载 `ChargeWatch-0.7.0.dmg`，打开后把 `ChargeWatch.app` 拖入"应用程序"。
 
 ### 2. 首次打开（ad-hoc 签名）
 

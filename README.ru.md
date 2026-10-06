@@ -9,7 +9,7 @@
 [![Платформа](https://img.shields.io/badge/платформа-macOS%2013%2B-000000?style=flat-square&logo=apple&logoColor=white)](https://www.apple.com/macos/)
 [![Apple Silicon](https://img.shields.io/badge/лимит%20заряда-Apple%20Silicon-555555?style=flat-square&logo=apple&logoColor=white)](#требования)
 [![Swift](https://img.shields.io/badge/Swift-5.9-FA7343?style=flat-square&logo=swift&logoColor=white)](https://swift.org)
-[![Версия](https://img.shields.io/badge/версия-v0.6.0-2563EB?style=flat-square)](https://github.com/TY-teo/ChargeWatching/releases)
+[![Версия](https://img.shields.io/badge/версия-v0.7.0-2563EB?style=flat-square)](https://github.com/TY-teo/ChargeWatching/releases)
 [![Лицензия](https://img.shields.io/badge/лицензия-MIT-3DA639?style=flat-square)](LICENSE)
 
 [English](README.en.md) · **Русский** · [简体中文](README.md)
@@ -100,7 +100,7 @@ ChargeWatch — небольшая утилита, постоянно живущ
 
 ### 1. Загрузка
 
-Перейдите в [Releases](https://github.com/TY-teo/ChargeWatching/releases), скачайте `ChargeWatch-0.6.0.zip`, распакуйте и перетащите `ChargeWatch.app` в папку «Программы».
+Перейдите в [Releases](https://github.com/TY-teo/ChargeWatching/releases), скачайте `ChargeWatch-0.7.0.dmg`, откройте его и перетащите `ChargeWatch.app` в папку «Программы».
 
 ### 2. Первый запуск (ad-hoc подпись)
 

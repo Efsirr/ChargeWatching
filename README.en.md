@@ -9,7 +9,7 @@ See exactly where every watt goes, and let the battery truly *rest* once it reac
 [![Platform](https://img.shields.io/badge/platform-macOS%2013%2B-000000?style=flat-square&logo=apple&logoColor=white)](https://www.apple.com/macos/)
 [![Apple Silicon](https://img.shields.io/badge/charge%20limit-Apple%20Silicon-555555?style=flat-square&logo=apple&logoColor=white)](#requirements)
 [![Swift](https://img.shields.io/badge/Swift-5.9-FA7343?style=flat-square&logo=swift&logoColor=white)](https://swift.org)
-[![Version](https://img.shields.io/badge/version-v0.6.0-2563EB?style=flat-square)](https://github.com/TY-teo/ChargeWatching/releases)
+[![Version](https://img.shields.io/badge/version-v0.7.0-2563EB?style=flat-square)](https://github.com/TY-teo/ChargeWatching/releases)
 [![License](https://img.shields.io/badge/license-MIT-3DA639?style=flat-square)](LICENSE)
 
 **English · [Русский](README.ru.md) · [简体中文](README.md)**
@@ -102,7 +102,7 @@ This is not a crude "charge to full, then unplug and drain" approach — it take
 
 ### 1. Download
 
-Go to [Releases](https://github.com/TY-teo/ChargeWatching/releases), download `ChargeWatch-0.6.0.zip`, unzip it and drag `ChargeWatch.app` into your Applications folder.
+Go to [Releases](https://github.com/TY-teo/ChargeWatching/releases), download `ChargeWatch-0.7.0.dmg`, open it and drag `ChargeWatch.app` into your Applications folder.
 
 ### 2. Opening it the first time (ad-hoc signature)
 
